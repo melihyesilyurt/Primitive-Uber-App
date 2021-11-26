@@ -59,18 +59,18 @@ export default function Home() {
 
         PushNotification.localNotification({
             channelId: "test-channel",
-            title: "You clicked on " + item.country,
+            title: item.country + "Tıkladınız ",
             message: item.city,
-            bigText: item.city + " is one of the largest and most beatiful cities in " + item.country,
+            bigText: item.city + " ne güzel bir şehir " + item.country,
             color: "red",
             id: index
         });
 
         PushNotification.localNotificationSchedule({
             channelId: "test-channel",
-            title: "Alarm",
-            message: "You clicked on " + item.country + " 20 seconds ago",
-            date: new Date(Date.now() + 20 * 1000),
+            title: "Scheduled Title",
+            message: "5 saniye önce " + item.country + " tıkladınız ",
+            date: new Date(Date.now() + 5 * 1000),
             allowWhileIdle: true,
         });
     }
