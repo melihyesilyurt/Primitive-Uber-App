@@ -27,10 +27,9 @@ const NavOptions = () => {
         data= {data}
         horizontal
         keyExtractor= {(item) =>item.id}
-        horizontal
         renderItem={({ item }) => (
             <TouchableOpacity 
-            onPress={() => navigation.navigate("MapScreen")}
+            onPress={() => navigation.navigate(item.screen)}
             style = {tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
             >
                 <View>
