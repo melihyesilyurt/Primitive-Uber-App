@@ -31,7 +31,8 @@ const HomeScreen = () => {
                 dispatch(setOrigin({
                     location: details.geometry.location,
                     description: data.description,
-                }))
+                })
+                );
 
                 dispatch(setDestination(null));
               }}
@@ -39,7 +40,7 @@ const HomeScreen = () => {
               returnKeyType={"search"}
               enablePoweredByContainer={false}
               minLength={2}
-              query= {{key: GOOGLE_MAPS_APIKEY, language: 'en',}} 
+              query= {{key: 'AIzaSyDlHuSSsZ3Pm0d_ncCZryAGICKOyewgRKI', language: 'en',}} 
               nearbyPlacesAPI= "GooglePlacesSearch" 
               debounce={400}/>  
 
