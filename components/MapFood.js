@@ -49,18 +49,6 @@ const Map = () => {
                 longitudeDelta: 0.5,
             }}
         >
-            {origin && destination && (
-                <MapViewDirections
-                    lineDashPattern={[0]} // I added
-                    origin={origin.description}
-                    destination={destination.description}
-                    apikey={'AIzaSyDlHuSSsZ3Pm0d_ncCZryAGICKOyewgRKI'}
-                    strokeWidth={3}
-                    strokeColor="black"
-                />
-            )}
-
-
             {origin?.location && (
                 <Marker
                     coordinate={{
@@ -70,17 +58,6 @@ const Map = () => {
                     title="Origin"
                     description={origin.description}
                     identifier="origin"
-                />
-            )}
-            {destination?.location && (
-                <Marker
-                    coordinate={{
-                        latitude: destination.location.lat,
-                        longitude: destination.location.lng,
-                    }}
-                    title="Destination"
-                    description={destination.description}
-                    identifier="destination"
                 />
             )}
         </MapView>

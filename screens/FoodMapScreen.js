@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet,Text, View,TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import Map from "../components/Map";
+import MapFood from "../components/MapFood";
 import { createStackNavigator } from "@react-navigation/stack";
-import NavigateCard from "../components/NavigateCard";
-import RideOptionsCard from "../components/RideOptionsCard";
-import TravelCard from "../components/TravelCard";
+import FoodCard from "../components/FoodCard";
+import FoodOptionsCard from "../components/FoodOptionsCard";
 import { Icon } from "react-native-elements";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
@@ -21,32 +20,26 @@ const MapScreen = () => {
             </TouchableOpacity>
 
             <View style={tw`h-1/2`}>
-                <Map />
+                <MapFood />
             </View>
 
             <View style={tw`h-1/2`}>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name="NavigateCard"
-                        component={NavigateCard}
+                        name="FoodOptionsCard"
+                        component={FoodOptionsCard}
                         options={{
                             headerShown: false,
                         }}
                     />
                     <Stack.Screen
-                        name="RideOptionsCard"
-                        component={RideOptionsCard}
+                        name="FoodCard"
+                        component={FoodCard}
                         options={{
                             headerShown: false,
                         }}
                     />
-                     <Stack.Screen
-                        name="TravelCard"
-                        component={TravelCard}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
+                   
                 </Stack.Navigator>
             </View>
         </View>

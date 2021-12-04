@@ -8,42 +8,48 @@ import { selectTravelTimeInformation } from '../slices/navSlice';
 
 const data = [
     {
-        id: "Uber-X-123",
-        title: "Uber X",
-        multiplier: 1,
-        image: "https://links.papareact.com/3pn",
+        id: "Hamburger-123",
+        title: "Hamburger",
+        image: "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        money: 35,
     },
     {
-        id: "Uber-XL-456",
-        title: "Uber XL",
-        multiplier: 1.2,
-        image: "https://links.papareact.com/5w8",
+        id: "Pizza-456",
+        title: "Pizza",
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=481&q=80",
+        money: 50,
     },
     {
-        id: "Uber-LUX-789",
-        title: "Uber LUX",
-        multiplier: 1.75,
-        image: "https://links.papareact.com/7pf",
+        id: "Fish-789",
+        title: "Fish",
+        image: "https://images.unsplash.com/photo-1601314002592-b8734bca6604?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        money: 42,
+    },
+    {
+        id: "ice-cream-123",
+        title: "Ice Cream",
+        image: "https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+        money: 16,
+    },
+    {
+        id: "taco-123",
+        title: "Taco",
+        image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=480&q=80",
+        money: 36,
     },
 ];
 
 const SURGE_CHARGE_RATE =1.5;
 
-const RideOptionsCard = () => {
+const FoodOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
-    console.log(travelTimeInformation);
     return (
-        <SafeAreaView style={tw`bg-white flex-grow`}>
+        <SafeAreaView>
             <View>
-                <TouchableOpacity
-                   onPress={() => navigation.navigate("NavigateCard")}
-                    style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}
-                >
-                    <Icon name="chevron-left" type="fontawesome" />
-                </TouchableOpacity>
-                <Text style={tw`text-center py-5 text-xl`}>Select a Ride - {travelTimeInformation?.distance?.text}</Text>
+
+                <Text style={tw`text-center py-5 text-xl`}>Select a Food</Text>
             </View>
 
             <FlatList
@@ -65,18 +71,18 @@ const RideOptionsCard = () => {
                     />
                     <View style ={tw`-ml-6`}>
                         <Text style={tw `text-xl font-semibold`}>{title}</Text>
-                        <Text>{travelTimeInformation?.duration?.text} Travel Time</Text>
                     </View>
                     <Text style = {tw`text-xl`}>
-                       
-                        {((travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier) /100).toFixed(2)} TL
+                        {item.money} TL
                     </Text>
                 </TouchableOpacity>
             )}
             />
 
             <View style ={tw`mt-auto border-t border-gray-200`}>
-                <TouchableOpacity onPress={() => navigation.navigate("TravelCard")} disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}>
+                <TouchableOpacity disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`} onPress= {() => {
+                        navigation.navigate("FoodCard");
+                    }}>
                     <Text style={tw`text-center text-white text-xl`}> 
                     Choose {selected?.title}</Text>
                 </TouchableOpacity>
@@ -85,6 +91,6 @@ const RideOptionsCard = () => {
     );
 };
 
-export default RideOptionsCard
+export default FoodOptionsCard
 
 const styles = StyleSheet.create({});

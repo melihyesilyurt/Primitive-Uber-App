@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Image,TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../components/NavOptions";
 import NavFavourites from "../components/NavFavourites";
@@ -7,12 +7,19 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
 import { setDestination, setOrigin } from "../slices/navSlice";
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
+            <TouchableOpacity onPress={() => navigation.navigate("HistoryScreen")}
+            style ={tw`bg-gray-100 absolute top-16 right-8 z-50 p-3 rounded-full`}>
+                <Icon name="tag" />
+            </TouchableOpacity>
             <View style= {tw`p-5`}>
                 <Image
                     style={{

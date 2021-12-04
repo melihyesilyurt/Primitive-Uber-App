@@ -3,6 +3,8 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Provider } from 'react-redux'
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
+import HistoryScreen from './screens/HistoryScreen';
+import FoodMapScreen from './screens/FoodMapScreen';
 import { store } from './store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
@@ -19,6 +21,8 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen name= 'HomeScreen' component={HomeScreen} options={{headerShown: false,}}/>
             <Stack.Screen name= 'MapScreen' component={MapScreen} options={{headerShown: false,}}/>
+            <Stack.Screen name= 'FoodMapScreen' component={FoodMapScreen} options={{headerShown: false,}}/>
+            <Stack.Screen name= 'HistoryScreen' component={HistoryScreen} options={{headerShown: false,}}/>
           </Stack.Navigator> 
           </KeyboardAvoidingView>
         </SafeAreaProvider>
