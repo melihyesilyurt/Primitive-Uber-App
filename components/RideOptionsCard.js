@@ -33,7 +33,8 @@ const RideOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
-    console.log(travelTimeInformation);
+    const handleNotification = () => {};
+
     return (
         <SafeAreaView style={tw`bg-white flex-grow`}>
             <View>
@@ -76,7 +77,10 @@ const RideOptionsCard = () => {
             />
 
             <View style ={tw`mt-auto border-t border-gray-200`}>
-                <TouchableOpacity onPress={() => navigation.navigate("TravelCard")} disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}>
+                <TouchableOpacity onPress={() => 
+                    navigation.navigate("TravelCard")
+                } 
+                    disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}>
                     <Text style={tw`text-center text-white text-xl`}> 
                     Choose {selected?.title}</Text>
                 </TouchableOpacity>

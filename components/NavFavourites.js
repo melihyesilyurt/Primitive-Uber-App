@@ -2,19 +2,22 @@ import React from "react";
 import { StyleSheet, Text, Touchable, View,FlatList, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
+import { useDispatch } from "react-redux";
+import { setDestination, setOrigin } from "../slices/navSlice";
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const data= [
     {
         id: "123",
         icon: "home",
         location: "Home",
-        destination: "Code Street, Lonon, Uk",
+        destination: "Kartal/İstanbul, Turkey",
     },
     {
         id: "456",
         icon: "briefcase",
         location: "Work",
-        destination: "London Eye, London, UK",
+        destination: "Kabaoğlu, Kocaeli Üniversitesi, İzmit/Kocaeli, Turkey",
     },
     {
         id: "789",
@@ -25,6 +28,7 @@ const data= [
 ];
 
 const NavFavourites = () => {
+    const dispatch = useDispatch();
     return <FlatList data={data} keyExtractor={(item) => item.id}
     ItemSeparatorComponent={() =>( <View style={[tw`bg-gray-200`, { height: 0.5 }]} />
     )}
