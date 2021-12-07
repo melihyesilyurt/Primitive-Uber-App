@@ -9,13 +9,15 @@ import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useState from 'react-hook-use-state';
 
 const Map = () => {
     const origin = useSelector(selectOrigin);
     const destination = useSelector(selectDestination);
     const mapRef = useRef(null);
     const dispatch = useDispatch();
-
+    const [lat, setlat] = useState(0);
+    const [lng, setlng] = useState(0);
     const save = async () => {
         let lastroad = {
           origin: origin.description,
@@ -24,7 +26,21 @@ const Map = () => {
         await AsyncStorage.setItem("Roadinfo",JSON.stringify(lastroad));
 
       };
+      const load = async () => {
+        try {
+            let jsonValue = await AsyncStorage.getItem("userLocation")
+            if(jsonValue != null)
+            {
+                console.log(JSON.parse(jsonValue))
+                setlat(JSON.parse(jsonValue).lat)
+                setlng(JSON.parse(jsonValue).lng)
+            }
+        } catch (error) {
+          // Error retrieving data
+        }
+      };
     useEffect(() => {
+        
         if (!origin || !destination) return;
 
         mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], {
@@ -34,7 +50,7 @@ const Map = () => {
 
     useEffect(() => {
         if (!origin || !destination) return;
-
+        {load();}
         const getTravelTime = async () => {
 
             fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${'AIzaSyDlHuSSsZ3Pm0d_ncCZryAGICKOyewgRKI'}`).then((res) => res.json())
@@ -45,6 +61,7 @@ const Map = () => {
         console.log("origin   "+origin.description)
         console.log("destination   "+ destination.description)
         {save();}
+        
         getTravelTime();
     }, [origin, destination, 'AIzaSyDlHuSSsZ3Pm0d_ncCZryAGICKOyewgRKI']);
 
@@ -82,7 +99,9 @@ const Map = () => {
                     description={origin.description}
                     identifier="origin"
                 />
+                
             )}
+          
             {destination?.location && (
                 <Marker
                     coordinate={{
@@ -94,6 +113,14 @@ const Map = () => {
                     identifier="destination"
                 />
             )}
+           <Marker
+                    coordinate={{
+                        latitude: lat,
+                        longitude:lng,
+                    }}
+                    title="User"
+                    identifier="User's Location"
+             />
         </MapView>
     );
 };

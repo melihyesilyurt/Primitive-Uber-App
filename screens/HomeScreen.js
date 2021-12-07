@@ -36,9 +36,10 @@ const HomeScreen = () => {
               placeholder= "Where From?" 
               styles={{container: { flex: 0,}, textInput: { fontSize: 18,},}} 
               onPress ={(data, details = null) => {
-                console.log(data);
+                console.log(details.geometry.location);
                 dispatch(setOrigin({
                     location: details.geometry.location,
+                    
                     description: data.description,
                 })
                 );
@@ -55,6 +56,7 @@ const HomeScreen = () => {
 
                 <NavOptions />
                 
+                <NavFavourites />
             </View>
         </SafeAreaView>
     );
