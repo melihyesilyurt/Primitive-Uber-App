@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const data = [
     {
@@ -45,6 +46,17 @@ const FoodOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
+
+    const save = async () => {
+        let lastfood = {
+          price: selected?.money,
+          travelTime: travelTimeInformation?.duration?.text,
+          image: selected?.image,
+          title: selected?.title
+        }
+        await AsyncStorage.setItem("Foodinfo",JSON.stringify(lastfood));
+
+      };
     return (
         <SafeAreaView>
             <View>
@@ -80,9 +92,7 @@ const FoodOptionsCard = () => {
             />
 
             <View style ={tw`mt-auto border-t border-gray-200`}>
-                <TouchableOpacity disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`} onPress= {() => {
-                        navigation.navigate("FoodCard");
-                    }}>
+                <TouchableOpacity disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`} onPress= {() => {save(); navigation.navigate("FoodCard");}}>
                     <Text style={tw`text-center text-white text-xl`}> 
                     Choose {selected?.title}</Text>
                 </TouchableOpacity>

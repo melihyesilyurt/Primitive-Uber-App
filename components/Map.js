@@ -8,6 +8,7 @@ import { selectDestination, selectOrigin, setTravelTimeInformation } from "../sl
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useRef } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Map = () => {
     const origin = useSelector(selectOrigin);
@@ -15,6 +16,14 @@ const Map = () => {
     const mapRef = useRef(null);
     const dispatch = useDispatch();
 
+    const save = async () => {
+        let lastroad = {
+          origin: origin.description,
+          destination: destination.description,
+        }
+        await AsyncStorage.setItem("Roadinfo",JSON.stringify(lastroad));
+
+      };
     useEffect(() => {
         if (!origin || !destination) return;
 
@@ -33,7 +42,9 @@ const Map = () => {
                 dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
             });
         };
-
+        console.log("origin   "+origin.description)
+        console.log("destination   "+ destination.description)
+        {save();}
         getTravelTime();
     }, [origin, destination, 'AIzaSyDlHuSSsZ3Pm0d_ncCZryAGICKOyewgRKI']);
 

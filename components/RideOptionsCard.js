@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const data = [
     {
         id: "Uber-X-123",
@@ -33,8 +33,17 @@ const RideOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
-    const handleNotification = () => {};
+    const save = async () => {
+        let lastdrive = {
+          price: ((travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * selected?.multiplier) /100).toFixed(2),
+          travelTime: travelTimeInformation?.duration?.text,
+          image:selected?.image,
+          title: selected?.title
+        }
+        await AsyncStorage.setItem("Carinfo",JSON.stringify(lastdrive));
 
+      };
+    
     return (
         <SafeAreaView style={tw`bg-white flex-grow`}>
             <View>
@@ -69,7 +78,6 @@ const RideOptionsCard = () => {
                         <Text>{travelTimeInformation?.duration?.text} Travel Time</Text>
                     </View>
                     <Text style = {tw`text-xl`}>
-                       
                         {((travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier) /100).toFixed(2)} TL
                     </Text>
                 </TouchableOpacity>
@@ -77,9 +85,7 @@ const RideOptionsCard = () => {
             />
 
             <View style ={tw`mt-auto border-t border-gray-200`}>
-                <TouchableOpacity onPress={() => 
-                    navigation.navigate("TravelCard")
-                } 
+                <TouchableOpacity onPress={() =>{save(); navigation.navigate("TravelCard");} } 
                     disabled={!selected} style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}>
                     <Text style={tw`text-center text-white text-xl`}> 
                     Choose {selected?.title}</Text>
@@ -87,6 +93,7 @@ const RideOptionsCard = () => {
             </View>
         </SafeAreaView>
     );
+    
 };
 
 export default RideOptionsCard

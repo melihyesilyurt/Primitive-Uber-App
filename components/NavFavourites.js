@@ -7,7 +7,7 @@ import { setDestination, setOrigin } from "../slices/navSlice";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const data= [
-    {
+   /* {
         id: "123",
         icon: "home",
         location: "Home",
@@ -18,7 +18,7 @@ const data= [
         icon: "briefcase",
         location: "Work",
         destination: "Kabaoğlu, Kocaeli Üniversitesi, İzmit/Kocaeli, Turkey",
-    },
+    },*/
     {
         id: "789",
         icon: "location",

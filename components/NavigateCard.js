@@ -33,7 +33,6 @@ const NavigateCard = () => {
                         );
 
                         navigation.navigate("RideOptionsCard");
-
                     }}
                     enablePoweredByContainer={false}
                     query= {{key: 'AIzaSyDlHuSSsZ3Pm0d_ncCZryAGICKOyewgRKI', language: 'en',}} 
@@ -41,8 +40,6 @@ const NavigateCard = () => {
                     debounce={400} 
                     />
                 </View>
-
-                <NavFavourites />
             </View>
 
             <View style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}>
