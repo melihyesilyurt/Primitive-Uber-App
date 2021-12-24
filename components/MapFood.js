@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import tw from "tailwind-react-native-classnames";
 import { selectDestination, selectOrigin, setTravelTimeInformation } from "../slices/navSlice";
 import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

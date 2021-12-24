@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
 import tw from "tailwind-react-native-classnames";
 import { setDestination } from '../slices/navSlice';
